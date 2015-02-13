@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> hello bing</title>
+	<script src="cordova.js"></style>
+	<style type ="text/css">
+	</head>
+	
+	<body onload ="domLoaded()">
+	<div id="main">This is the body of the app</div>
+	
+	<div>footer</div>
+	<script> 
+
+ function adSetter(){
+          alert("adsetter");
+		  
+      if (admob) {
+        var adPublisherIds = {
+         
+          android : {
+            banner : "ca-app-pub-7973587087974413/2609977283"//,
+            //interstitial : "ca-app-pub-XXXXXXXXXXXXXXXX/IIIIIIIIII"
+          }
+        };
+
+        var admobid = (/(android)/i.test(navigator.userAgent)) ? adPublisherIds.android : adPublisherIds.ios;
+
+        admob.setOptions({
+          publisherId:      admobid.banner,
+          interstitialAdId: admobid.interstitial
+        
+        });
+
+        admob.createBannerView();
+      } else {
+               //if no admob present
+			   }
+		function onDeviceReady(){
+        alert("device ready");
+        adSetter();
+		}
+		function backCall(e){
+		e.preventDefault();
+		var action =confirm("Do you want to Exit");
+		if(action)
+		{
+		admob.requestInterstitialAd();
+		navigator.app.exitApp();
+		}
+		}
+		
+		function domLoaded(){
+		document.addEventlistener("deviceready",onDeviceReady,false);
+		document.addEventListener("backbutton",backCall,false);
+		}
+		</script>
+		</body>
+		</html>
+		
+		
+
+
